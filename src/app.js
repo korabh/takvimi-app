@@ -32,10 +32,7 @@ const mb = menubar({
   preloadWindow: true
 })
 
-
 mb.on('ready', function ready () {
-  autoUpdater()
-
   mb.window.openDevTools();
   mb.showWindow()
 })
