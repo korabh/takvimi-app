@@ -46,8 +46,13 @@ const refreshTimings = function () {
 
 const showTimingsData = function () {
   const wdata = store.getWdata()
+  const wrap = jQuery('#details .hourly #canvas-holder')
+
   jQuery('.content #hijri-date').html(wdata[0].data.hijri)
-  jQuery('.content #qibla_direction').html(wdata[0].qibla_direction)
+
+  jQuery.each(wdata[0].data, function (key, value) {
+    console.log(key + '=' + value);
+  })
 }
 
 exports.getTimingsDaily = getTimingsDaily
