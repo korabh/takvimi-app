@@ -3,6 +3,11 @@
   "version": "v0.0.1",
   "start": {
     "interval": 300000
+  },
+  "timings" : {
+    "url": {
+      "daily": "https://dawa-tools.herokuapp.com/v1/timings/daily"
+    }
   }
 }
 

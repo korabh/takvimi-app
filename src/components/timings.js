@@ -34,7 +34,21 @@ const refreshInfo = function () {
 }
 
 const refreshTimings = function () {
+  const wdata = store.getWdata()
+  // utils.reset()
+
+  getTimingsDaily(config.timings.url.daily, 0, showWeatherData)
+}
+
+config showTimingsData = function () {
+  const wdata = store.getWdata()
+  let items = jQuery('#details .timings')
+  items.each(function (idx, item) {
+    jQuery('.item-' + idx + ' .date').html(item)
+  })
 }
 
 exports.getTimingsDaily = getTimingsDaily
 exports.refreshInfo = refreshInfo
+exports.refreshTimings = refreshTimings
+exports.showTimingsData = showTimingsData

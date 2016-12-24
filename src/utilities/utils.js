@@ -15,7 +15,7 @@ const setWdata = function (data) {
 
 const showErrorMessage = function (message) {
   hideAll()
-  jQuery('#main .content .note').html(message)
+  jQuery('#error').html(message)
 }
 
 exports.showErrorMessage = showErrorMessage
