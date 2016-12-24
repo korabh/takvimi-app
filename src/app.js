@@ -2,6 +2,7 @@
 
 const electron = require('electron')
 const app = electron.app
+const globalShortcut = electron.globalShortcut
 const menubar = require('menubar')
 const config = require('./../package.json')
 const path = require('path')
@@ -37,4 +38,4 @@ mb.on('ready', function ready () {
 
   mb.window.openDevTools();
   mb.showWindow()
-}
+})
