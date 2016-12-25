@@ -1,3 +1,23 @@
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: -10px;
+  font-family: Rubik, sans-serif;
+  overflow: hidden;
+  background: #262c37;
+  -webkit-overflow-scrolling: touch;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
 .timing {
   display: -webkit-flex;
   display: flex;
