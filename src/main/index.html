@@ -2,27 +2,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="icons.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/icons.css">
+  <link rel="stylesheet" href="./css/unslider.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body>
+<body class="tashi">
   <section class="timing-section bg-8">
-    <div class="timing timing--tashi">
-      <div class="timing__item">
-        <h3 class="timing__title">Pro</h3>
-        <p class="timing__sentence">For any large corporation with an unlimited number of members</p>
-        <div class="timing__price"><span class="timing__currency">$</span>499<span class="timing__period">/ month</span></div>
-        <ul class="timing__feature-list">
-          <li class="timing__feature">Unlimited space</li>
-          <li class="timing__feature">20 hours of free support</li>
-          <li class="timing__feature">Full social media package</li>
-        </ul>
-        <button class="timing__action" aria-label="Purchase this plan"><span class="icon icon--arrow-right"></span></button>
-      </div>
+    <div class="timing timing--tashi" id="tashi--slider">
+      <ul class"automatic--slider">
+        <li class="timing__item">
+          <h3 class="timing__title">Pro</h3>
+          <p class="timing__sentence">For any large corporation with an unlimited number of members</p>
+          <div class="timing__price"><span class="timing__currency">$</span>499<span class="timing__period">/ month</span></div>
+          <ul class="timing__feature-list">
+            <li class="timing__feature">Unlimited space</li>
+            <li class="timing__feature">20 hours of free support</li>
+            <li class="timing__feature">Full social media package</li>
+          </ul>
+          <button class="timing__action" aria-label="Purchase this plan"><span class="icon icon--arrow-right"></span></button>
+        </li>
+        <li class="timing__item">
+          <h3 class="timing__title">Basic</h3>
+          <p class="timing__sentence">For any large corporation with an unlimited number of members</p>
+          <div class="timing__price"><span class="timing__currency">$</span>499<span class="timing__period">/ month</span></div>
+          <ul class="timing__feature-list">
+            <li class="timing__feature">Unlimited space</li>
+            <li class="timing__feature">20 hours of free support</li>
+            <li class="timing__feature">Full social media package</li>
+          </ul>
+          <button class="timing__action" aria-label="Purchase this plan"><span class="icon icon--arrow-right"></span></button>
+        </li>
+      </ul>
     </div>
   </section>
+  
+  <script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>
-<script type="text/javascript" src="main.js"></script>

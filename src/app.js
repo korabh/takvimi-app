@@ -27,12 +27,12 @@ const mb = menubar({
   icon: path.join(__dirname, '/../assets/IconTemplate.png'),
   width: 280,
   height: 480,
-  resizable: false,
+  resizable: true,
   showDockIcon: false,
   preloadWindow: true
 })
 
 mb.on('ready', function ready () {
-  // mb.window.openDevTools();
+  mb.window.openDevTools();
   mb.showWindow()
 })

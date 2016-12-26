@@ -4,6 +4,7 @@ const superagent = require('superagent')
 const jQuery = require('jquery')
 const utils = require('./../utilities/utils')
 const store = require('./../utilities/store')
+const unslider = require('jquery-unslider')
 
 const config = require('./../main/config.json')
 
@@ -52,6 +53,9 @@ const showTimingsData = function () {
 
   jQuery.each(wdata[0].data, function (key, value) {
     console.log(key + '=' + value);
+  })
+  jQuery('#tashi--slider').unslider({
+    autoplay: true
   })
 }
 
