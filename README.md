@@ -11,3 +11,9 @@
 Builds app binaries for OS X, Linux, and Windows.
 
 ```npm run build```
+
+## TODO
+
+Add http://unslider.com/
+Push Notifications
+Set title /w icon

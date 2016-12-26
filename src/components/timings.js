@@ -47,15 +47,11 @@ const refreshTimings = function () {
 
 const showTimingsData = function () {
   const wdata = store.getWdata()
-  const wrap = jQuery('#details .hourly #canvas-holder')
-
-  jQuery('.content #hijri-date').html(wdata[0].data.hijri)
+    const wrap = jQuery('.timing ')
 
   jQuery.each(wdata[0].data, function (key, value) {
+    //jQuery('.timing .timing__item .timing__title').append(value)
     console.log(key + '=' + value);
-  })
-  jQuery('#tashi--slider').unslider({
-    autoplay: true
   })
 }
 
