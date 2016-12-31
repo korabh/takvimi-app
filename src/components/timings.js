@@ -3,6 +3,7 @@
 const superagent = require('superagent')
 const jQuery = require('jquery')
 const _ = require('underscore')
+const countdown = require('jquery-countdown')
 const utils = require('./../utilities/utils')
 const store = require('./../utilities/store')
 const unslider = require('jquery-unslider')
@@ -41,7 +42,6 @@ const refreshInfo = function () {
 }
 
 const refreshTimings = function () {
-  const wdata = store.getWdata()
   // utils.reset()
   getTimingsDaily(config.timings.url.daily, 0, showTimingsData)
 }
@@ -54,16 +54,33 @@ const showTimingsData = function () {
   items.each(function (i, item) {
     jQuery('.item-' + i + ' .timing__title').html(utils.displayTitle(timingsData[i][0]))
     jQuery('.item-' + i + ' .timing__sentence').html(wdata[0].hijri_formatted)
-    jQuery('.item-' + i + ' .timing__price').html(timingsData[i][1])
 
+    var finalDate = utils.getTodayDate() + ' ' + timingsData[i][1]
+    jQuery('.item-' + i + ' .timing__time').attr("data-countdown", finalDate)
     jQuery('.item-' + i + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
+   
     var nextItem = timingsData[i+1]
     jQuery('.item-' + i + ' .timing__feature-list .upcoming-time').html(nextItem)
-  })
- }
 
+    jQuery('.timing-section .timing--tashi [data-countdown]').each(function() {
+      var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
+      console.log(this);
+      $this.countdown(finalDate, function(event) {
+        var format = 'in %Hh %Mm';
+        if (event.offset.totalHours <= 0) {
+          format = 'in %Mm %Ss';
+        }
+        $this.html(event.strftime(format));
+      })
+    })
+  })
+}
+
+const startCountdown = function () {
+}
 
 exports.getTimingsDaily = getTimingsDaily
 exports.refreshInfo = refreshInfo
 exports.refreshTimings = refreshTimings
 exports.showTimingsData = showTimingsData
+exports.startCountdown = startCountdown
