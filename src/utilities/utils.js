@@ -7,4 +7,9 @@ const showErrorMessage = function (message) {
   jQuery('#error').html(message)
 }
 
+const displayTitle = function (s) {
+  return s.charAt(0).toUpperCase() + s.substring(1).toLowerCase()
+}
+
 exports.showErrorMessage = showErrorMessage
+exports.displayTitle = displayTitle

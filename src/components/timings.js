@@ -48,16 +48,20 @@ const refreshTimings = function () {
 
 const showTimingsData = function () {
   const wdata = store.getWdata()
-  let _data = _.pairs(wdata[0].data)
+  let timingsData = _.pairs(wdata[0].data)
+  // Temporary workaround.
   let items = jQuery('.timing-section .timing--tashi .timing__item')
   items.each(function (i, item) {
-    jQuery('.item-' + i + ' .timing__title').html(_data[i][0])
-    jQuery('.item-' + i + ' .timing__sentence').html("1 Rabi Al-Akhar, 1438 Hijri")
-    jQuery('.item-' + i + ' .timing__price').html(_data[i][1])
-    jQuery('.item-' + i + ' .timing__feature-list .timing__feature .upcoming-text').html("Upcoming Prayer")
-    jQuery('.item-' + i + ' .timing__feature-list .timing__feature .upcoming-time').html("Dhuhr 11:43")
+    jQuery('.item-' + i + ' .timing__title').html(utils.displayTitle(timingsData[i][0]))
+    jQuery('.item-' + i + ' .timing__sentence').html(wdata[0].hijri_formatted)
+    jQuery('.item-' + i + ' .timing__price').html(timingsData[i][1])
+
+    jQuery('.item-' + i + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
+    var nextItem = timingsData[i+1]
+    jQuery('.item-' + i + ' .timing__feature-list .upcoming-time').html(nextItem)
   })
  }
+
 
 exports.getTimingsDaily = getTimingsDaily
 exports.refreshInfo = refreshInfo
