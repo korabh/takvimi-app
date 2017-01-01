@@ -13,7 +13,7 @@ const config = require('./../main/config.json')
 const getTimingsDaily = function (url, option, callback) {
   superagent
     .get(url)
-    .query({timestamp: Math.floor(Date.now() / 1000)})
+    .query({timestamp: 1483148157/* Math.floor(Date.now() / 1000) */})
     .end(function(err, res) {
       if (err || !res.ok) {
         utils.showErrorMessage('Failure during data fetching')
@@ -48,35 +48,37 @@ const refreshTimings = function () {
 
 const showTimingsData = function () {
   const wdata = store.getWdata()
-  let timingsData = _.pairs(wdata[0].data)
-  // Temporary workaround.
+  let data = _.pairs(wdata[0].data)
   let items = jQuery('.timing-section .timing--tashi .timing__item')
-  items.each(function (i, item) {
-    jQuery('.item-' + i + ' .timing__title').html(utils.displayTitle(timingsData[i][0]))
-    jQuery('.item-' + i + ' .timing__sentence').html(wdata[0].hijri_formatted)
-
-    var finalDate = utils.getTodayDate() + ' ' + timingsData[i][1]
-    jQuery('.item-' + i + ' .timing__time').attr("data-countdown", finalDate)
-    jQuery('.item-' + i + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
-   
-    var nextItem = timingsData[i+1]
-    jQuery('.item-' + i + ' .timing__feature-list .upcoming-time').html(nextItem)
-
-    jQuery('.timing-section .timing--tashi [data-countdown]').each(function() {
-      var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
-      console.log(this);
-      $this.countdown(finalDate, function(event) {
-        var format = 'in %Hh %Mm';
-        if (event.offset.totalHours <= 0) {
-          format = 'in %Mm %Ss';
-        }
-        $this.html(event.strftime(format));
-      })
-    })
+  items.each(function (idx, item) {
+    jQuery('.item-' + idx + ' .timing__title').html(utils.displayTitle(data[idx][0]))
+    jQuery('.item-' + idx + ' .timing__sentence').html(wdata[0].hijri_formatted)
+    setDataCountdown(idx, data)
+    if (idx != items.length) {
+      jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
+      jQuery('.item-' + idx + ' .timing__feature-list .upcoming-time').html(data[idx+1])
+    }
+    startCountdown()
   })
 }
 
 const startCountdown = function () {
+  let wrap = jQuery('.timing-section .timing--tashi [data-countdown]')
+  wrap.each(function() {
+    var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
+    $this.countdown(finalDate, function(event) {
+      var format = 'in %Hh %Mm';
+      if (event.offset.totalHours <= 0) {
+        format = 'in %Mm %Ss';
+      }
+      $this.html(event.strftime(format));
+    })
+  })
+}
+
+const setDataCountdown = function (idx, data) {
+  var date = utils.getTodayDate() + ' ' + data[idx][1]
+  jQuery('.item-' + idx + ' .timing__time').attr('data-countdown', date)
 }
 
 exports.getTimingsDaily = getTimingsDaily
