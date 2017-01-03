@@ -13,7 +13,7 @@ const config = require('./../main/config.json')
 const getTimingsDaily = function (url, option, callback) {
   superagent
     .get(url)
-    .query({timestamp: 1483148157/* Math.floor(Date.now() / 1000) */})
+    .query({timestamp: Math.floor(Date.now() / 1000)})
     .end(function(err, res) {
       if (err || !res.ok) {
         utils.showErrorMessage('Failure during data fetching')
@@ -86,3 +86,4 @@ exports.refreshInfo = refreshInfo
 exports.refreshTimings = refreshTimings
 exports.showTimingsData = showTimingsData
 exports.startCountdown = startCountdown
+exports.setDataCountdown = setDataCountdown
