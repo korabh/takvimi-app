@@ -85,12 +85,18 @@ const showOwlCarousel = function () {
   owl.owlCarousel({
     items: 5,
     navigation: false,
-    singleItem: true
+    singleItem: true,
+    afterAction : afterAction
   })
 
   jQuery('.owl-next').click(function(){
     owl.trigger('owl.next')
   })
+
+  function afterAction(){
+    console.log(this.owl.currentItem)
+  }
+
 }
 
 const setDataCountdown = function (idx, data) {
