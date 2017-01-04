@@ -1,6 +1,6 @@
 {
   "name": "timings",
-  "version": "v0.0.1",
+  "version": "v0.7.0",
   "start": {
     "interval": 300000
   },
