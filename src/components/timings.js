@@ -54,9 +54,12 @@ const showTimingsData = function () {
     jQuery('.item-' + idx + ' .timing__title').html(utils.displayTitle(data[idx][0]))
     jQuery('.item-' + idx + ' .timing__sentence').html(wdata[0].hijri_formatted)
     setDataCountdown(idx, data)
-    if (idx != items.length) {
+    if (idx != items.length-1) {
       jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
-      jQuery('.item-' + idx + ' .timing__feature-list .upcoming-time').html(data[idx+1])
+    // Temporary workaround.
+      jQuery('.item-' + idx + ' .timing__feature-list .upcoming-time').html(data[idx+1].join(' '))
+    } else {
+      jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html(wdata[0].date)
     }
     startCountdown()
   })
@@ -77,10 +80,16 @@ const startCountdown = function () {
 }
 
 const showOwlCarousel = function () {
+  let owl = jQuery('.timing--tashi')
   // owl.carousel.js.
-  jQuery('.timing--tashi').owlCarousel({
+  owl.owlCarousel({
     items: 5,
-    navigation: true
+    navigation: false,
+    singleItem: true
+  })
+
+  jQuery('.owl-next').click(function(){
+    owl.trigger('owl.next')
   })
 }
 
