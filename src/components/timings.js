@@ -6,7 +6,6 @@ const _ = require('underscore')
 const countdown = require('jquery-countdown')
 const utils = require('./../utilities/utils')
 const store = require('./../utilities/store')
-const unslider = require('jquery-unslider')
 
 const config = require('./../main/config.json')
 
@@ -44,6 +43,7 @@ const refreshInfo = function () {
 const refreshTimings = function () {
   // utils.reset()
   getTimingsDaily(config.timings.url.daily, 0, showTimingsData)
+  showOwlCarousel()
 }
 
 const showTimingsData = function () {
@@ -76,6 +76,14 @@ const startCountdown = function () {
   })
 }
 
+const showOwlCarousel = function () {
+  // owl.carousel.js.
+  jQuery('.timing--tashi').owlCarousel({
+    items: 5,
+    navigation: true
+  })
+}
+
 const setDataCountdown = function (idx, data) {
   var date = utils.getTodayDate() + ' ' + data[idx][1]
   jQuery('.item-' + idx + ' .timing__time').attr('data-countdown', date)
@@ -86,4 +94,5 @@ exports.refreshInfo = refreshInfo
 exports.refreshTimings = refreshTimings
 exports.showTimingsData = showTimingsData
 exports.startCountdown = startCountdown
+exports.showOwlCarousel = showOwlCarousel
 exports.setDataCountdown = setDataCountdown

@@ -54,6 +54,7 @@
     "jquery-unslider": "^1.2.0",
     "jquery.countdown": "^1.2.8",
     "menubar": "^5.1.0",
+    "owl.carousel": "^2.2.0",
     "strftime": "^0.10.0",
     "superagent": "^3.3.1",
     "underscore": "^1.8.3"
