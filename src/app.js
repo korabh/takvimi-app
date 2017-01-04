@@ -5,7 +5,6 @@ const app = electron.app
 const globalShortcut = electron.globalShortcut
 const menubar = require('menubar')
 const config = require('./../package.json')
-const semver = require('semver')
 const path = require('path')
 
 
