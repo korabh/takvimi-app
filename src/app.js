@@ -4,6 +4,7 @@ const electron = require('electron')
 const app = electron.app
 const globalShortcut = electron.globalShortcut
 const menubar = require('menubar')
+const semver = require('semver')
 const superagent = require('superagent')
 const config = require('./../package.json')
 const path = require('path')
@@ -25,10 +26,10 @@ app.on('will-quit', function () {
 
 const mb = menubar({
   index: path.join('file://', __dirname, '/main/index.html'),
-  icon: path.join(__dirname, '/../assets/IconTemplate.png'),
+  icon: path.join(__dirname, '/../src/main/img/Icon.png'),
   width: 280,
   height: 480,
-  resizable: false,
+  resizable: true,
   showDockIcon: false,
   preloadWindow: true
 })
