@@ -37,7 +37,7 @@ const mb = menubar({
 mb.on('ready', function ready () {
   autoUpdater()
 
-  // mb.window.openDevTools();
+  mb.window.openDevTools();
   mb.showWindow()
 })
 

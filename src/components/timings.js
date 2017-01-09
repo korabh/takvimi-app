@@ -42,7 +42,8 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  getTimingsDaily(config.timings.url.daily, 0, showTimingsData)
+  getTimingsDaily(config.timings.test, 0, showTimingsData)
+  // getTimingsDaily(config.timings.url.daily, 0, showTimingsData)
   showOwlCarousel()
 }
 
@@ -56,7 +57,6 @@ const showTimingsData = function () {
     setDataCountdown(idx, data)
     if (idx != items.length-1) {
       jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html("Upcoming Prayer")
-    // Temporary workaround.
       jQuery('.item-' + idx + ' .timing__feature-list .upcoming-time').html(data[idx+1].join(' '))
     } else {
       jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html(wdata[0].date)
@@ -74,6 +74,9 @@ const startCountdown = function () {
       if (event.offset.totalHours <= 0) {
         format = 'in %Mm %Ss';
       }
+      if (event.elapsed) {
+        // Remove card.
+      }
       $this.html(event.strftime(format));
     })
   })
@@ -86,6 +89,8 @@ const showOwlCarousel = function () {
     items: 5,
     navigation: false,
     singleItem: true,
+    touchDrag: false,
+    mouseDrag: false,
     afterAction : afterAction
   })
 
