@@ -2,17 +2,25 @@
 
 const superagent = require('superagent')
 const jQuery = require('jquery')
+const $ = jQuery;
+window.$ = jQuery;
 const _ = require('underscore')
 const countdown = require('jquery-countdown')
 const utils = require('./../utilities/utils')
 const store = require('./../utilities/store')
+const notifier = require('node-notifier')
 
 const config = require('./../main/config.json')
 
-const getTimingsDaily = function (url, option, callback) {
+const getTimingsDaily = function (url, option, add_hours, callback) {
+  add_hours = add_hours | 0;
+  
+  var date = new Date();
+  date.setHours( date.getHours() + add_hours );
+
   superagent
     .get(url)
-    .query({timestamp: Math.floor(Date.now() / 1000)})
+    .query({timestamp: Math.floor(+date / 1000)})
     .end(function(err, res) {
       if (err || !res.ok) {
         utils.showErrorMessage('Failure during data fetching')
@@ -42,9 +50,25 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  getTimingsDaily(config.timings.test, 0, showTimingsData)
-  // getTimingsDaily(config.timings.url.daily, 0, showTimingsData)
-  showOwlCarousel()
+  getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
+  // getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
+
+  jQuery('.owl-next').click(function(){
+    jQuery('.timing--tashi').trigger('owl.next')
+  })
+
+}
+
+const timingsLoaded = function() {
+  addTimingItems();
+  showTimingsData();
+  showOwlCarousel();
+}
+
+const addTimingItems = function() {
+  for(var i=0; i<5; i++) {
+    jQuery('.timing-section .timing--tashi').append( jQuery('.item-' + i) );
+  }
 }
 
 const showTimingsData = function () {
@@ -67,19 +91,40 @@ const showTimingsData = function () {
 
 const startCountdown = function () {
   let wrap = jQuery('.timing-section .timing--tashi [data-countdown]')
-  wrap.each(function() {
+  wrap.each(function(idx,el) {
+    var $el = jQuery(el).parents('.timing__item');
     var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
     $this.countdown(finalDate, function(event) {
       var format = 'in %Hh %Mm';
       if (event.offset.totalHours <= 0) {
         format = 'in %Mm %Ss';
       }
+      if( event.offset.totalMinutes <= 5 && !$el.data('notification-sent') && !event.elapsed ) {
+        $el.data('notification-sent', true);
+        let timeTitle = $el.find('.timing__title').text();
+        notifier.notify('5 minutes left to ' + timeTitle );
+      }
       if (event.elapsed) {
+        hideCard( $el );
         // Remove card.
       }
       $this.html(event.strftime(format));
     })
   })
+}
+
+const hideCard = function( el ) {
+    setTimeout(function(){
+      el.data('notification-sent', false);
+
+      jQuery('.timing--tashi').data('owlCarousel').destroy();
+      $('#hidden-times').append( el );
+      showOwlCarousel();
+      
+      if( $('.timing--tashi .timing__item').length == 0 ) {
+        getTimingsDaily(config.timings.url.daily, 0, 24, timingsLoaded)
+      }
+    },50);
 }
 
 const showOwlCarousel = function () {
@@ -90,17 +135,8 @@ const showOwlCarousel = function () {
     navigation: false,
     singleItem: true,
     touchDrag: false,
-    mouseDrag: false,
-    afterAction : afterAction
+    mouseDrag: false
   })
-
-  jQuery('.owl-next').click(function(){
-    owl.trigger('owl.next')
-  })
-
-  function afterAction(){
-    console.log(this.owl.currentItem)
-  }
 
 }
 
@@ -116,3 +152,4 @@ exports.showTimingsData = showTimingsData
 exports.startCountdown = startCountdown
 exports.showOwlCarousel = showOwlCarousel
 exports.setDataCountdown = setDataCountdown
+exports.hideCard = hideCard;
