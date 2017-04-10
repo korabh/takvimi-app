@@ -1,9 +1,9 @@
 'use strict'
 
-const superagent = require('superagent')
 const jQuery = require('jquery')
 const $ = jQuery;
 window.$ = jQuery;
+const superagent = require('superagent')
 const _ = require('underscore')
 const countdown = require('jquery-countdown')
 const utils = require('./../utilities/utils')
@@ -50,8 +50,8 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
-  // getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
+  // getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
+  getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
 
   jQuery('.owl-next').click(function(){
     jQuery('.timing--tashi').trigger('owl.next')
@@ -102,11 +102,15 @@ const startCountdown = function () {
       if( event.offset.totalMinutes <= 5 && !$el.data('notification-sent') && !event.elapsed ) {
         $el.data('notification-sent', true);
         let timeTitle = $el.find('.timing__title').text();
-        notifier.notify('5 minutes left to ' + timeTitle );
+        
+        notifier.notify({
+          'title': 'Takvimi',
+          'message': timeTitle
+        });
       }
       if (event.elapsed) {
+        // Hide card.
         hideCard( $el );
-        // Remove card.
       }
       $this.html(event.strftime(format));
     })
@@ -137,7 +141,6 @@ const showOwlCarousel = function () {
     touchDrag: false,
     mouseDrag: false
   })
-
 }
 
 const setDataCountdown = function (idx, data) {
