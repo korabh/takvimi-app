@@ -9,14 +9,17 @@ const countdown = require('jquery-countdown')
 const utils = require('./../utilities/utils')
 const store = require('./../utilities/store')
 const notifier = require('node-notifier')
+const strftime = require('strftime')
 
 const config = require('./../main/config.json')
 
 const getTimingsDaily = function (url, option, add_hours, callback) {
-  add_hours = add_hours | 0;
+  add_hours = add_hours || 0;
   
   var date = new Date();
   date.setHours( date.getHours() + add_hours );
+  window.dd = date;
+  var dateString = strftime('%Y/%m/%d',date); 
 
   superagent
     .get(url)
@@ -27,6 +30,13 @@ const getTimingsDaily = function (url, option, add_hours, callback) {
         console.log(err)
       } else {
         const wdata = store.getWdata()
+        res.body.data = {
+          fajr:     dateString + " 15:43:10",
+          dhuhr:    dateString + " 15:43:20",
+          asr:      dateString + " 15:43:30",
+          maghrib:  dateString + " 15:43:40",
+          isha:     dateString + " 15:43:50",
+        }
         wdata[option] = res.body
         store.setWdata(wdata)
         if (wdata[option].cod !== 404) {
@@ -50,8 +60,8 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  // getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
-  getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
+  getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
+  // getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
 
   jQuery('.owl-next').click(function(){
     jQuery('.timing--tashi').trigger('owl.next')
@@ -85,8 +95,8 @@ const showTimingsData = function () {
     } else {
       jQuery('.item-' + idx + ' .timing__feature-list .upcoming-text').html(wdata[0].date)
     }
-    startCountdown()
   })
+  startCountdown();
 }
 
 const startCountdown = function () {
@@ -95,7 +105,11 @@ const startCountdown = function () {
     var $el = jQuery(el).parents('.timing__item');
     var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
     $this.countdown(finalDate, function(event) {
+      if(idx==0) console.log(event);
       var format = 'in %Hh %Mm';
+      if( event.offset.totalDays > 0 ) {
+        format = 'in %Dd %Hh';
+      }
       if (event.offset.totalHours <= 0) {
         format = 'in %Mm %Ss';
       }
@@ -121,18 +135,23 @@ const hideCard = function( el ) {
     setTimeout(function(){
       el.data('notification-sent', false);
 
+      console.log(jQuery(el).find('[data-countdown]'), jQuery(el).find('[data-countdown]').data());
+      jQuery(el).find('[data-countdown]').countdown('remove');
+
       jQuery('.timing--tashi').data('owlCarousel').destroy();
       $('#hidden-times').append( el );
-      showOwlCarousel();
       
       if( $('.timing--tashi .timing__item').length == 0 ) {
         getTimingsDaily(config.timings.url.daily, 0, 24, timingsLoaded)
+      }else{
+        showOwlCarousel();
       }
     },50);
 }
 
 const showOwlCarousel = function () {
-  let owl = jQuery('.timing--tashi')
+  let owl = jQuery('.timing--tashi');
+  owl.data('owlInit',false);
   // owl.carousel.js.
   owl.owlCarousel({
     items: 5,
@@ -144,8 +163,8 @@ const showOwlCarousel = function () {
 }
 
 const setDataCountdown = function (idx, data) {
-  var date = utils.getTodayDate() + ' ' + data[idx][1]
-  jQuery('.item-' + idx + ' .timing__time').attr('data-countdown', date)
+  console.log(data[idx][1])
+  jQuery('.item-' + idx + ' .timing__time').data('countdown', data[idx][1] ).attr('data-countdown', data[idx][1] );
 }
 
 exports.getTimingsDaily = getTimingsDaily
