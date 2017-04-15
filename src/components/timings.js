@@ -29,14 +29,10 @@ const getTimingsDaily = function (url, option, add_hours, callback) {
         utils.showErrorMessage('Failure during data fetching')
         console.log(err)
       } else {
-        const wdata = store.getWdata()
-        res.body.data = {
-          fajr:     dateString + " 15:43:10",
-          dhuhr:    dateString + " 15:43:20",
-          asr:      dateString + " 15:43:30",
-          maghrib:  dateString + " 15:43:40",
-          isha:     dateString + " 15:43:50",
+        for(var i in res.body.data) {
+          res.body.data[i] = dateString + " " + res.body.data[i];
         }
+        const wdata = store.getWdata()
         wdata[option] = res.body
         store.setWdata(wdata)
         if (wdata[option].cod !== 404) {
@@ -60,8 +56,8 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
-  // getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
+  // getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
+  getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
 
   jQuery('.owl-next').click(function(){
     jQuery('.timing--tashi').trigger('owl.next')
@@ -105,7 +101,6 @@ const startCountdown = function () {
     var $el = jQuery(el).parents('.timing__item');
     var $this = jQuery(this), finalDate = jQuery(this).data('countdown');
     $this.countdown(finalDate, function(event) {
-      if(idx==0) console.log(event);
       var format = 'in %Hh %Mm';
       if( event.offset.totalDays > 0 ) {
         format = 'in %Dd %Hh';
@@ -135,7 +130,6 @@ const hideCard = function( el ) {
     setTimeout(function(){
       el.data('notification-sent', false);
 
-      console.log(jQuery(el).find('[data-countdown]'), jQuery(el).find('[data-countdown]').data());
       jQuery(el).find('[data-countdown]').countdown('remove');
 
       jQuery('.timing--tashi').data('owlCarousel').destroy();
@@ -163,7 +157,6 @@ const showOwlCarousel = function () {
 }
 
 const setDataCountdown = function (idx, data) {
-  console.log(data[idx][1])
   jQuery('.item-' + idx + ' .timing__time').data('countdown', data[idx][1] ).attr('data-countdown', data[idx][1] );
 }
 
