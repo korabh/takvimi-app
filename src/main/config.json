@@ -8,7 +8,7 @@
     "url": {
       "daily": "https://dawa-tools.herokuapp.com/v1/timings/daily"
     },
-    "test": "http://localhost:9292/v1/timings/random"
+    "test": "https://dawa-tools.herokuapp.com/v1/timings/random"
   }
 }
 
