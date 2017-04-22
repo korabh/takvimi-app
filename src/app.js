@@ -20,7 +20,6 @@ app.on('window-all-closed', function () {
 })
 
 app.on('will-quit', function () {
-  // Unregister all shortcuts.
   globalShortcut.unregisterAll()
 })
 

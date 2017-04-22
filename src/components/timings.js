@@ -113,7 +113,7 @@ const startCountdown = function () {
         
         notifier.notify({
           'title': 'Takvimi',
-          'message': timeTitle
+          'message': 'Koha e ' + timeTitle
         });
       }
       if (event.elapsed) {
@@ -145,7 +145,7 @@ const hideCard = function( el ) {
 const showOwlCarousel = function () {
   let owl = jQuery('.timing--tashi');
   owl.data('owlInit',false);
-  // owl.carousel.js.
+  
   owl.owlCarousel({
     items: 5,
     navigation: false,
