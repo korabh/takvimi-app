@@ -11,5 +11,4 @@
 
 Builds app binaries for OS X, Linux, and Windows.
 
-```electron-packer . Takvimi --platform[darwin|win32]
---icon=src/main/img/takvimi-icon.png.icns```
+```electron-packer . Takvimi --platform[darwin|win32] --icon=src/main/img/takvimi-icon.png.icns```
