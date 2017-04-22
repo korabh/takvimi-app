@@ -1,0 +1,14 @@
+{
+  "name": "timings",
+  "version": "v0.7.0",
+  "start": {
+    "interval": 300000
+  },
+  "timings" : {
+    "url": {
+      "daily": "http://localhost:3000/v1/timings/daily"
+    },
+    "test": "https://dawa-tools.herokuapp.com/v1/timings/random"
+  }
+}
+

@@ -1,0 +1,161 @@
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: -10px;
+  font-family: Rubik, sans-serif;
+  overflow: hidden;
+  background: #262c37;
+  -webkit-overflow-scrolling: touch;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
+.timing {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 3em;
+}
+
+.timing__item {
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  text-align: center;
+  -webkit-flex: 0 1 330px;
+  flex: 0 1 330px;
+}
+
+.timing__feature-list {
+  text-align: left;
+}
+
+.timing__action {
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+.timing__action:focus {
+  outline: none;
+}
+
+/* tashi */
+.timing--tashi .timing__item {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0.5em;
+  padding: 2em 2.5em;
+  text-align: left;
+  color: #fff;
+  background: #262c37;
+}
+
+.timing--tashi .timing__title {
+  font-size: 2em;
+  font-weight: 300;
+  margin: 0 0 0.15em;
+  color: #E25A77;
+}
+
+.timing--tashi .timing__item:nth-child(2) .timing__title {
+  color: #E25ABC;
+}
+
+.timing--tashi .timing__item:nth-child(3) .timing__title {
+  color: #7E5AE2;
+}
+
+.timing--tashi .timing__time {
+  font-size: 3em;
+  font-weight: 300;
+  padding: 0.85em 0;
+}
+
+.timing--tashi .timing__currency {
+  font-size: 0.65em;
+  vertical-align: super;
+  color: #394150;
+}
+
+.timing--tashi .timing__period {
+  font-size: 0.35em;
+  padding: 0 0 0 0.5em;
+  color: #535965;
+}
+
+.timing--tashi .timing__sentence {
+  padding: 0 0 0.5em;
+  margin: 0;
+  color: #535965;
+}
+
+.timing--tashi .timing__feature-list {
+  font-size: 0.95em;
+  margin: 0;
+  padding: 0 0 2.5em;
+  list-style: none;
+  color: #757983;
+}
+
+.timing--tashi .timing__feature {
+  position: relative;
+  display: block;
+  padding: 0 0 0 20px;
+  line-height: 1.5;
+}
+
+.timing--tashi .timing__feature::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: #1F242D;
+  left: 0;
+  top: 50%;
+  margin: -2px 0 0 0;
+}
+
+.timing--tashi .timing__action {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+  margin-top: auto;
+  font-size: 1.55em;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  border-radius: 30px;
+  background: #E25A77;
+  -webkit-transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.timing--tashi .timing__item:nth-child(2) .timing__action {
+  background: #E25ABC;
+}
+
+.timing--tashi .timing__item:nth-child(3) .timing__action {
+  background: #7E5AE2;
+}
+
+.timing--tashi .timing__action:hover,
+.timing--tashi .timing__action:focus {
+  background: #1A1F28 !important;
+}
+

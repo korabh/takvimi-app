@@ -1,5 +1,5 @@
 
-## Development
+## Takvimi APP
 
 ### Run app
 
@@ -11,10 +11,5 @@
 
 Builds app binaries for OS X, Linux, and Windows.
 
-```npm run build```
-
-## TODO
-
-Add http://unslider.com/
-Push Notifications
-Set title /w icon
+```electron-packer . Takvimi --platform[darwin|win32]
+--icon=src/main/img/takvimi-icon.png.icns```

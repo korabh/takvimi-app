@@ -1,9 +1,9 @@
 {
-  "name": "timings",
-  "productName": "Timings",
+  "name": "takvimi",
+  "productName": "Takvimi",
   "website": "https://",
   "version": "0.7.0",
-  "icon": "assets/app.png",
+  "icon": "/Users/korabh/git/timings-app/app.ico",
   "description": "A simple but smart menubar timings app",
   "main": "src/app.js",
   "electronVersion": "1.4.12",
@@ -43,7 +43,7 @@
     "electron": "^1.4.12",
     "electron-builder": "10.8.1",
     "electron-installer-dmg": "0.1.2",
-    "electron-packager": "^8.0.0",
+    "electron-packager": "^8.6.0",
     "electron-prebuilt": "^1.4.1",
     "standard": "^8.3.0"
   },
