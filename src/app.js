@@ -27,8 +27,8 @@ app.on('will-quit', function () {
 const mb = menubar({
   index: path.join('file://', __dirname, '/main/index.html'),
   icon: path.join(__dirname, '/../src/main/img/Icon.png'),
-  width: 280,
-  height: 480,
+  width: 290,
+  height: 402,
   resizable: true,
   showDockIcon: false,
   preloadWindow: true
@@ -36,8 +36,7 @@ const mb = menubar({
 
 mb.on('ready', function ready () {
   autoUpdater()
-
-  mb.window.openDevTools();
+  // mb.window.openDevTools();
   mb.showWindow()
 })
 

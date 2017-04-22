@@ -56,7 +56,6 @@ const refreshInfo = function () {
 
 const refreshTimings = function () {
   // utils.reset()
-  // getTimingsDaily(config.timings.test, 0, 0, timingsLoaded)
   getTimingsDaily(config.timings.url.daily, 0, 0, timingsLoaded)
 
   jQuery('.owl-next').click(function(){
