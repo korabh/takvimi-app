@@ -1,5 +1,5 @@
 
-## Takvimi APP
+## Takvimi
 
 ### Run app
 
@@ -12,3 +12,7 @@
 Builds app binaries for OS X, Linux, and Windows.
 
 ```electron-packer . Takvimi --platform[darwin|win32] --icon=src/main/img/takvimi-icon.png.icns```
+
+## http://dawa-tools.herokuapp.com/zikirs
+
+## Puntoria LLC. 2018
