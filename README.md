@@ -13,6 +13,6 @@ Builds app binaries for OS X, Linux, and Windows.
 
 ```electron-packer . Takvimi --platform[darwin|win32] --icon=src/main/img/takvimi-icon.png.icns```
 
-## http://dawa-tools.herokuapp.com/zikirs
+### http://dawa-tools.herokuapp.com
 
 ## Puntoria LLC. 2018
